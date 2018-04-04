@@ -1,0 +1,29 @@
+{
+  "name": "batapp",
+  "version": "1.0.0",
+  "description": "A Quasar Framework app",
+  "productName": "BDE App",
+  "cordovaId": "org.cordova.quasar.app",
+  "author": "thi4go <thiagofigueiredo777@gmail.com>",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "localforage": "^1.5.6",
+    "sugar": "^2.0.4"
+  },
+  "devDependencies": {
+    "quasar-cli": "^0.15.1"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ]
+}
