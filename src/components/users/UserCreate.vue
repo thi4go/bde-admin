@@ -73,7 +73,7 @@ export default {
         let r = await api.createUser(data)
 
         console.log(r)
-        this.$store.dispatch('ADD_USER', r.data)
+        this.$store.commit('ADD_USER_OBJ', r.data)
 
         this.$q.notify({
           message: 'MC criado com sucesso',
