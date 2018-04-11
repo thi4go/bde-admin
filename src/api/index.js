@@ -2,8 +2,8 @@ import axios from 'axios'
 
 
 const http = axios.create({
-  // baseURL: 'http://localhost:8000'
-  baseURL: 'https://batalha-da-escada.herokuapp.com/'
+  baseURL: 'http://localhost:8000'
+  // baseURL: 'https://batalha-da-escada.herokuapp.com/'
 })
 
 

@@ -9,6 +9,8 @@
         <div class="gutter-sm">
           <q-input v-model="user.name" color="black" float-label="Nome"  />
           <q-input v-model="user.email" color="black" float-label="Email" />
+          <q-input v-model="user.password" color="black" float-label="Senha" type="password" />
+
           <div class="row lg-gutter no-wrap">
             <q-radio v-model="user.gender" color="black" val="mano" label="Mano" /> &nbsp&nbsp&nbsp
             <q-radio v-model="user.gender" color="black" val="mina" label="Mina" />

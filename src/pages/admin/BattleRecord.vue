@@ -148,7 +148,6 @@ export default {
     },
 
     async setWinner (user, round) {
-      console.log(round)
       try {
         await this.$q.dialog({
           title: '',
@@ -166,7 +165,9 @@ export default {
           user_id: user._id
         }
 
-        await this.$store.dispatch('UPDATE_ROUND_WINNER', payload)
+        const response = await api.updateRoundWinner(payload)
+
+        this.battle = response.data
 
         this.updating = false
 
@@ -177,7 +178,7 @@ export default {
           timeout: 2000
         })
       } catch (err) {
-
+        console.log(err)
       }
 
     },
