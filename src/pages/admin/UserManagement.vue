@@ -104,9 +104,7 @@ export default {
     }
   },
 
-  mounted () {
-    console.log(20%10)
-  },
+
   methods: {
     searchUsers () {
       const scope = this

@@ -15,7 +15,7 @@
       v-model="leftDrawerOpen"
       content-class="bg-grey-2"
     >
-      <div style="background: no-repeat top/100% url(https://images8.alphacoders.com/362/362827.jpg); background-size: 100%">
+      <div style="background: no-repeat top/100% url(https://scontent.fbsb3-1.fna.fbcdn.net/v/t1.0-9/14690893_1310073899016884_909833133643426842_n.jpg?_nc_cat=0&oh=85f0616dcc377ae7baae013d70e2000b&oe=5B902CAF); background-size: 100%">
         <div style="padding-top: 13em">
           <q-list no-border link inset-separator>
             <q-list-header>#BDE - Gestão</q-list-header>
@@ -53,8 +53,8 @@
     <!-- Navigation for iOS theme -->
       <q-tabs align="justify" position="top" color="black" width="4%" >
         <q-route-tab @select="changeFocus(1)" :color="selectedTab == 1 ? 'pink-7' : 'pink-3'" slot="title" icon="home" to="/home" replace  />
-        <q-route-tab @select="changeFocus(2)" :color="selectedTab == 2 ? 'pink-7' : 'pink-3'" slot="title" icon="mic" to="/battle" replace  />
-        <q-route-tab @select="changeFocus(3)" :color="selectedTab == 3 ? 'pink-7' : 'pink-3'" slot="title" icon="linked_camera" to="/" replace  />
+        <q-route-tab @select="changeFocus(2)" :color="selectedTab == 2 ? 'pink-7' : 'pink-3'" slot="title" icon="mic" to="/ranking" replace  />
+        <q-route-tab @select="changeFocus(3)" :color="selectedTab == 3 ? 'pink-7' : 'pink-3'" slot="title" icon="linked_camera" to="/media" replace  />
         <q-route-tab @select="changeFocus(4)" :color="selectedTab == 4 ? 'pink-7' : 'pink-3'" slot="title" icon="person" to="/profile" replace  />
       </q-tabs>
     </q-layout-footer>
@@ -79,8 +79,8 @@ export default {
       this.selectedTab = tab
     },
 
-    logout () {
-      this.$store.dispatch('SET_SESSION', null)
+    async logout () {
+      await this.$store.dispatch('SET_SESSION', null)
       this.$router.go('/startup')
     }
   }

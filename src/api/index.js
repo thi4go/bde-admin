@@ -21,6 +21,10 @@ export default {
     return http.post('/user', data)
   },
 
+  isUniqueName (name) {
+    return http.get('/user/unique/'+name)
+  },
+
   createBattle (payload) {
     return http.post('/battle', payload)
   },
@@ -41,6 +45,10 @@ export default {
     return http.get('/users')
   },
 
+  getRanking () {
+    return http.get('/generate-ranking')
+  },
+
   /**
     DELETE Routes
   **/
@@ -52,6 +60,7 @@ export default {
   deleteBattle (id) {
     return http.delete('/battle/'+id)
   },
+
   /**
     PUT Routes
   **/
@@ -62,6 +71,10 @@ export default {
 
   updateUser (id, data) {
     return http.put('/user/'+id, data)
+  },
+
+  updateRound (id, data) {
+    return http.put('/round/'+id, data)
   },
 
   updateRoundWinner (payload) {

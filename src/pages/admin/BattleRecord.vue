@@ -1,4 +1,5 @@
 <template>
+  <q-page>
   <div>
     <div v-if="loading">
       <q-inner-loading :visible="loading">
@@ -38,13 +39,15 @@
         <q-btn @click="endBattleDialog()" size="sm" >
           <q-icon name="fa-check-square" color="orange"  />
         </q-btn>
-        &nbsp&nbsp&nbsp
-        <q-btn @click="deleteBattleDialog()" size="sm">
+        <!-- &nbsp&nbsp&nbsp -->
+        <!-- <q-btn @click="deleteBattleDialog()" size="sm">
           <q-icon name="fa-times" color="red"  />
-        </q-btn>
-
+        </q-btn> -->
       </q-card-actions>
     </q-card>
+    <br /><br />
+
+    <q-toggle v-model="editMode" label="Edit Mode" color="dark" />
 
     <br /><br />
 
@@ -57,19 +60,30 @@
           <div v-for="round in stage.rounds" >
 
             <div v-if="round.winner == null" class="row justify-around " style="padding-top: 20px">
-              <q-btn @click="setWinner(round.first, round)" outline size="sm" >
-                <span>{{round.first.name}}</span>
-              </q-btn>
+              <q-btn-group>
+                <UserList v-if="editMode" v-on:update="updateRound" :round="round" :position="1"/>
+                <!-- <q-btn v-if="editMode" @click="editRound(round)" icon="edit" outline size="sm" /> -->
+                <q-btn @click="setWinner(round.first, round)" outline size="sm" >
+                  <span>{{round.first.name}}</span>
+                </q-btn>
+              </q-btn-group>
               <span class="absolute"> X </span>
-              <q-btn v-if="round.second != null" @click="setWinner(round.second, round)" outline size="sm" >
-                <span>{{round.second.name}}</span>
-              </q-btn>
+              <q-btn-group>
+                <UserList v-if="editMode" v-on:update="updateRound" :round="round" :position="2" />
+                <q-btn v-if="round.second != null" @click="setWinner(round.second, round)" outline size="sm" >
+                  <span>{{round.second.name}}</span>
+                </q-btn>
+              </q-btn-group>
 
               <div v-if="round.third != null">
                 <span class="relative" style="padding-right: 20px"> X </span>
-                <q-btn @click="setWinner(round.third, round)" outline size="sm" >
-                  <span>{{round.third.name}}</span>
-                </q-btn>
+                <q-btn-group>
+                  <UserList v-if="editMode" v-on:update="updateRound" :round="round" :position="3" />
+                  <q-btn @click="setWinner(round.third, round)" outline size="sm" >
+                    <span>{{round.third.name}}</span>
+                  </q-btn>
+                </q-btn-group>
+
               </div>
 
               <q-inner-loading :visible="updating">
@@ -78,19 +92,29 @@
             </div>
 
             <div v-else class="row justify-around " style="padding-top: 20px">
-              <q-btn size="sm" :color="round.first._id == round.winner._id ? 'green' : 'grey'" :outline="round.first._id == round.winner._id ? false : true">
-                <span>{{round.first.name}}</span>
-              </q-btn>
+              <q-btn-group>
+                <UserList v-if="editMode" v-on:update="updateRound" :round="round" :position="1"/>
+                <q-btn size="sm" :color="round.first._id == round.winner._id ? 'green' : 'grey'" :outline="round.first._id == round.winner._id ? false : true">
+                  <span>{{round.first.name}}</span>
+                </q-btn>
+              </q-btn-group>
               <span class="absolute"> X </span>
-              <q-btn v-if="round.second != null" :color="round.second._id == round.winner._id ? 'green' : 'grey'" :outline="round.second._id == round.winner._id ? false : true" size="sm">
-                <span>{{round.second.name}}</span>
-              </q-btn>
+              <q-btn-group>
+                <UserList v-if="editMode" v-on:update="updateRound" :round="round" :position="2"/>
+                <q-btn v-if="round.second != null" :color="round.second._id == round.winner._id ? 'green' : 'grey'" :outline="round.second._id == round.winner._id ? false : true" size="sm">
+                  <span>{{round.second.name}}</span>
+                </q-btn>
+              </q-btn-group>
 
               <div v-if="round.third != null">
                 <span class="relative" style="padding-right: 20px"> X </span>
-                <q-btn size="sm" :color="round.third._id == round.winner._id ? 'green' : 'grey'" :outline="round.third._id == round.winner._id ? false : true">
-                  <span>{{round.third.name}}</span>
-                </q-btn>
+                <q-btn-group>
+                  <UserList v-if="editMode" v-on:update="updateRound" :round="round" :position="3" />
+                  <q-btn size="sm" :color="round.third._id == round.winner._id ? 'green' : 'grey'" :outline="round.third._id == round.winner._id ? false : true">
+                    <span>{{round.third.name}}</span>
+                  </q-btn>
+                </q-btn-group>
+
               </div>
 
               <q-inner-loading :visible="updating">
@@ -104,24 +128,34 @@
 
         </q-collapsible>
 
+
       </div>
     </q-list>
   </div>
   </div>
+  </q-page>
 </template>
 
 
 <script>
 import api from '../../api'
+import UserList from 'components/users/UserList'
 
 export default {
   name: 'BattleRecord',
+
+  components: { UserList },
 
   data () {
     return {
       loading: true,
       updating: false,
-      battle: null
+      battle: null,
+      r: null,
+
+      editMode: false,
+      editingRound: false,
+      roundInScope: null
     }
   },
 
@@ -129,6 +163,7 @@ export default {
     const fetch  = this.$store.getters.findBattle(this.$route.params.id)
     this.battle  = fetch[0]
     this.loading = false
+
     console.log(this.battle)
   },
 
@@ -147,16 +182,31 @@ export default {
       }
     },
 
+    updateRound (r) {
+      const n = r.stage
+
+      for (var i = 0; i < this.battle.stages[n].rounds.length; i++) {
+        if (this.battle.stages[n].rounds[i]._id == r._id) {
+          console.log(this.battle.stages[n].rounds[i])
+          this.battle.stages[n].rounds[i] = r
+          console.log(this.battle.stages[n].rounds[i])
+        }
+      }
+      console.log('updated')
+      this.$forceUpdate()
+    },
+
     async setWinner (user, round) {
       try {
         await this.$q.dialog({
-          title: '',
+          title: 'Opa !',
           message: 'O MC ' + user.name + ' venceu o round?',
           position: 'right',
           ok: 'Sim',
           cancel: 'Não',
           color: 'dark'
         })
+
         this.updating = true
 
         const payload = {
@@ -205,7 +255,7 @@ export default {
           timeout: 2000
         })
 
-        this.$router.go('/home')
+        this.$router.go('/battle-management')
       } catch (err) {
         console.log(err)
       }

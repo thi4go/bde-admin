@@ -75,6 +75,8 @@ export default {
         console.log(r)
         this.$store.commit('ADD_USER_OBJ', r.data)
 
+        this.blankFields()
+
         this.$q.notify({
           message: 'MC criado com sucesso',
           color: 'black',
@@ -94,7 +96,14 @@ export default {
 
       this.opened  = false
       this.loading = false
+    },
 
+    blankFields () {
+      this.name     = null
+      this.email    = null
+      this.password = null
+      this.gender   = null
+      this.virgin   = false
     }
   }
 }

@@ -4,7 +4,7 @@
     <div class="col col-8 shadow-6">
       <div v-if="!create" style="padding: 20px">
 
-        <big>Gerência v2</big>
+        <big>Gerência v3</big>
         <br /><br />
         <p> Nessa seção você pode criar, editar e excluir batalhas. </p>
 
@@ -136,7 +136,10 @@ export default {
     if (this.$store.getters.battles.length == 0) {
       this.loading = true
       await this.$store.dispatch('SET_BSTATE')
-      console.log('fetched')
+    }
+    if(this.$store.getters.users.length == 0) {
+      this.loading = true
+      await this.$store.dispatch('SET_USTATE')
     }
 
     this.loading = false

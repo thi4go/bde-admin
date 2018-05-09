@@ -8,8 +8,10 @@ export default {
 
     if (session == null || session == undefined) {
       localforage.getItem('session').then( resp => {
-        if (resp != null)
+        if (resp != null) {
+          store.commit('DEFINE_SESSION', resp)
           next()
+        }
         else
           next ({ path: '/startup' })
       })

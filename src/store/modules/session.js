@@ -33,16 +33,15 @@ const actions = {
     commit(DEFINE_SESSION, session)
   },
 
-  [SET_SESSION] ({commit, state}, data) {
-    return new Promise((resolve, reject) => {
-      localforage.setItem('session', data).then( res => {
-        commit(DEFINE_SESSION, data)
-        resolve(res)
-      }).catch( err => {
-        reject(err)
-      })
-    })
-
+  async [SET_SESSION] ({commit, state}, data) {
+    console.log('defining session')
+    try {
+      commit(DEFINE_SESSION, data)
+      await localforage.setItem('session', data)
+      return
+    } catch (error) {
+      throw error
+    }
   },
 
   async register ({dispatch, commit}, payload) {
@@ -52,7 +51,8 @@ const actions = {
         email: payload.email,
         password: payload.password
       }
-      return dispatch('login', credentials)
+      await dispatch('login', credentials)
+      return response
     } catch (error) {
       throw error
     }
@@ -61,7 +61,8 @@ const actions = {
   async login ({dispatch, commit}, user) {
     try {
       const { data } = await api.login(user)
-      return dispatch(SET_SESSION, data)
+      await dispatch(SET_SESSION, data)
+      return data
     } catch (error) {
       throw error
     }

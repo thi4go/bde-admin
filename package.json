@@ -12,7 +12,9 @@
   "dependencies": {
     "axios": "^0.17.1",
     "localforage": "^1.5.6",
-    "sugar": "^2.0.4"
+    "npm": "^6.0.0",
+    "sugar": "^2.0.4",
+    "vuelidate": "^0.6.2"
   },
   "devDependencies": {
     "quasar-cli": "^0.15.1"

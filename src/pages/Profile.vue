@@ -2,39 +2,53 @@
   <q-page>
   <div class="container items-center">
 
-    <div class="col col-8 top shadow-6">
 
-      <div class="row">
-        <div class="col-2" style="margin-left: 10px; margin-top: 10px;">
-          <q-item-side avatar="https://i.ytimg.com/vi/fUWrhetZh9M/maxresdefault.jpg" />
-        </div>
-        <div class="col-8" style="margin-left: 10px; margin-top: 13px;">
-          <big>sdas</big><br />
-          <q-chip tag small pointing="up" color="dark">
-            MC
-          </q-chip> <br><br>
-        </div>
-      </div>
+    <q-card class="inline">
+      <q-card-title>
+        <div class="row justify-between">
+          <div>
+            <b>MC</b> &nbsp&nbsp{{ user.name }}
+          </div>
 
-    </div>
+          <div class="justify-around">
+            <q-btn size="md" flat icon="fa-edit" color="grey" @click="opened = true"/>
+          </div>
+        </div>
+      </q-card-title>
+      <!-- <q-card-separator /> -->
+
+      <!-- <q-card-main>
+        Card Content
+      </q-card-main> -->
+      <!-- <q-card-separator /> -->
+
+      <!-- <q-card-actions horizontal>
+        <q-btn flat label="Action 1" />
+        <q-btn flat label="Action 2" />
+      </q-card-actions> -->
+    </q-card>
+
     <br />
     <div class="col col-8 bot">
       <q-tabs color="white" position="top" inverted >
         <!-- Tabs - notice slot="title" -->
-        <q-tab default slot="title" name="tab-1" icon="mic" color="black" />
-        <q-tab slot="title" name="tab-2" icon="fingerprint" color="black" />
-        <q-tab slot="title" name="tab-3" icon="account_box" color="black" />
+        <q-tab default slot="title" name="tab-1" icon="account_box" color="black" />
+        <q-tab slot="title" name="tab-2" icon="mic" color="black" />
+        <q-tab slot="title" name="tab-3" icon="fingerprint" color="black" />
         <!-- Targets -->
         <q-tab-pane name="tab-1">
-          participações na batalha e ranking
+          <br />
+          <ProfileTab />
         </q-tab-pane>
 
         <q-tab-pane name="tab-2">
-          redes sociais
+          <br />
+          <TimelineTab />
         </q-tab-pane>
 
         <q-tab-pane name="tab-3">
-          <small>descrição do usuario louco, quem sou, onde estamos, pra onde vamos</small>
+          <br />
+          <SocialMediaTab />
         </q-tab-pane>
       </q-tabs>
     </div>
@@ -45,10 +59,14 @@
 <script>
 // import Avatar from 'vue-avatar'
 import ProfileCard from '../components/profile/ProfileCard'
+import SocialMediaTab from '../components/profile/SocialMediaTab'
+import ProfileTab from '../components/profile/ProfileTab'
+import TimelineTab from '../components/profile/TimelineTab'
+
 
 export default {
 
-  components: { ProfileCard },
+  components: { ProfileCard, SocialMediaTab, ProfileTab, TimelineTab },
 
   data () {
     return {
@@ -56,10 +74,8 @@ export default {
     }
   },
 
-  mounted () {
+  beforeMount () {
     this.user = this.$store.getters.session.user
-    console.log(this.user)
-    console.log('bla')
   }
 }
 </script>

@@ -62,9 +62,17 @@ const actions = {
   async [FETCH_BATTLES] ({commit, state}) {
     const battles = await api.getBattles()
 
-    commit(DEFINE_BATTLES, battles.data.reverse())
+    let bs = battles.data.sort( (a, b) => {
+      var n = a.name.substring(5)
+      var m = b.name.substring(5)
+      if (n < m) return -1
+      if (n > m) return 1
+      return 0
+    })
 
-    return localforage.setItem('battles', battles.data.reverse())
+    commit(DEFINE_BATTLES, bs.reverse())
+
+    return localforage.setItem('battles', bs)
   },
 
   async [FETCH_ACTIVE_BATTLE] ({commit, state}) {

@@ -13,12 +13,14 @@ export default {
   name: 'BattleDetail',
 
   data () {
-    battle: null
+    return {
+      battle: null
+    }
   },
 
   mounted () {
-    this.battle = this.$store.getters.findBattle(this.$router.params.id)
-
+    const fetch = this.$store.getters.findBattle(this.$route.params.id)
+    this.battle = fetch[0]
     console.log(this.battle)
   },
 

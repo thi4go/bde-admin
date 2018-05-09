@@ -3,7 +3,8 @@
 module.exports = function (ctx) {
   return {
     plugins: [
-      'api'
+      'api',
+      'vuelidate'
     ],
     css: [
       'app.styl'
@@ -51,6 +52,7 @@ module.exports = function (ctx) {
         'QToolbar',
         'QToolbarTitle',
         'QBtn',
+        'QBtnGroup',
         'QIcon',
         'QList',
         'QListHeader',
@@ -61,6 +63,10 @@ module.exports = function (ctx) {
         'QInput',
         'QSelect',
         'QRadio',
+        'QCarousel',
+        'QCarouselSlide',
+        'QTimeline',
+        'QTimelineEntry',
         'QCard',
         'QCardMain',
         'QCardTitle',
@@ -73,6 +79,11 @@ module.exports = function (ctx) {
         'QTabs',
         'QTab',
         'QTabPane',
+        'QTable',
+        'QTd',
+        'QTr',
+        'QTh',
+        'QTableColumns',
         'QRouteTab',
         'QToggle',
         'QCheckbox',
