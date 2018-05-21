@@ -129,14 +129,14 @@ export default {
         }, 3000)
       } else {
         this.loading = false
-        this.$router.push('/profile')
+        this.$router.replace('/profile')
       }
     },
 
     async register () {
       this.$v.newUser.$touch()
 
-      if (this.$v.newUser.$error) {
+      if (this.$v.newUser.$error || this.nameError) {
         this.$q.notify({
           message: 'Insira os dados corretamente',
           color: 'black',
@@ -151,6 +151,13 @@ export default {
           this.loading = false
           this.$router.push('/profile')
         } catch (error) {
+          this.$q.notify({
+            message: 'Um usuário com esse email já existe !',
+            color: 'black',
+            textColor: 'white',
+            timeout: 2000
+          })
+          this.loading = false
           throw error
         }
 

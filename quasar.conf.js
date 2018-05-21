@@ -52,6 +52,7 @@ module.exports = function (ctx) {
         'QToolbar',
         'QToolbarTitle',
         'QBtn',
+        'QBtnDropdown',
         'QBtnGroup',
         'QIcon',
         'QList',
@@ -83,6 +84,9 @@ module.exports = function (ctx) {
         'QTd',
         'QTr',
         'QTh',
+        'QStepper',
+        'QStep',
+        'QStepperNavigation',
         'QTableColumns',
         'QRouteTab',
         'QToggle',
@@ -95,7 +99,8 @@ module.exports = function (ctx) {
         'QSpinnerGears'
       ],
       directives: [
-        'Ripple'
+        'Ripple',
+        'GoBack'
       ],
       plugins: [
         'Notify',

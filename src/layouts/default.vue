@@ -2,12 +2,35 @@
   <q-layout view="hHr Lpr lFf" >
     <q-layout-header>
       <q-toolbar color="black">
-        <q-btn flat @click="leftDrawerOpen = !leftDrawerOpen" color="pink-7">
+        <q-btn v-if="$store.getters.session.user.userLevel == 4" flat @click="leftDrawerOpen = !leftDrawerOpen" color="pink-7">
           <q-icon name="menu" />
         </q-btn>
-        <q-toolbar-title glossy="true" align="center" style="padding-right: 50px">
+
+        <q-btn flat v-if="$store.getters.backButton" @click="$router.go(-1)" color="pink-7">
+          <q-icon name="fa-arrow-left" />
+        </q-btn>
+
+        <q-toolbar-title glossy="true" align="center" :style="$store.getters.backButton ? 'padding-left: 1px' : 'padding-left:50px'" >
             BDE
         </q-toolbar-title>
+
+        <q-btn-dropdown icon="fa-ellipsis-v">
+          <q-list link>
+            <q-item>
+              <q-item-main>
+                <q-btn size="md" flat icon="fa-lock" label="Senha" style="font-size: 11px"> </q-btn>
+              </q-item-main>
+            </q-item>
+            <q-item-separator />
+            <q-item>
+              <q-item-main>
+                <q-btn size="md" flat icon="fa-reply" label="Sair" ></q-btn>
+              </q-item-main>
+            </q-item>
+
+          </q-list>
+        </q-btn-dropdown>
+
       </q-toolbar>
     </q-layout-header>
 
@@ -15,8 +38,8 @@
       v-model="leftDrawerOpen"
       content-class="bg-grey-2"
     >
-      <div style="background: no-repeat top/100% url(https://scontent.fbsb3-1.fna.fbcdn.net/v/t1.0-9/14690893_1310073899016884_909833133643426842_n.jpg?_nc_cat=0&oh=85f0616dcc377ae7baae013d70e2000b&oe=5B902CAF); background-size: 100%">
-        <div style="padding-top: 13em">
+      <div>
+        <div style="padding-top: 2em">
           <q-list no-border link inset-separator>
             <q-list-header>#BDE - Gestão</q-list-header>
 
@@ -32,11 +55,6 @@
             </q-item>
 
 
-            <q-btn @click="logout" style="margin-top: 100px">
-              <q-icon name="fa-sign-out" />
-              <label>Sair</label>
-            </q-btn>
-
           </q-list>
         </div>
       </div>
@@ -45,7 +63,13 @@
 
 
     <q-page-container style="margin: 20px">
-      <router-view />
+      <transition
+        appear
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
+      >
+        <router-view />
+      </transition>
     </q-page-container>
 
 

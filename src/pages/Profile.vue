@@ -10,7 +10,7 @@
             <b>MC</b> &nbsp&nbsp{{ user.name }}
           </div>
 
-          <div class="justify-around">
+          <div slot="right" >
             <q-btn size="md" flat icon="fa-edit" color="grey" @click="opened = true"/>
           </div>
         </div>

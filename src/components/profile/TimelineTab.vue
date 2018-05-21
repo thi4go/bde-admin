@@ -6,7 +6,27 @@
       </q-timeline-entry>
 
       <q-timeline-entry
-        title="Event Title"
+        title="Participação na primeira batalha "
+        subtitle="February 22, 1986"
+        side="left"
+      >
+        <div>
+          Lorem ipsum dolor sit amet.
+        </div>
+      </q-timeline-entry>
+      
+      <q-timeline-entry
+        title="Participação na primeira batalha "
+        subtitle="February 22, 1986"
+        side="left"
+      >
+        <div>
+          Lorem ipsum dolor sit amet.
+        </div>
+      </q-timeline-entry>
+
+      <q-timeline-entry
+        title="Cadastrado no sistema"
         subtitle="February 22, 1986"
         side="left"
       >

@@ -1,4 +1,5 @@
 
+  export const SET_BACK_BUTTON = 'SET_BACK_BUTTON'
 /*
  *  SESSION MODULE
  */
@@ -14,10 +15,10 @@
 
   export const FETCH_BATTLES        = 'FETCH_BATTLES'
   export const FETCH_ACTIVE_BATTLE  = 'FETCH_ACTIVE_BATTLE'
-
+  export const FETCH_RANKING        = 'FETCH_RANKING'
   export const CREATE_BATTLE = 'CREATE_BATTLE'
   export const UPDATE_BATTLE = 'UPDATE_BATTLE'
-  
+
   export const UPDATE_ROUND_WINNER = 'UPDATE_ROUND_WINNER'
 
 

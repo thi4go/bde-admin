@@ -10,30 +10,30 @@
 
     <div v-else>
       <!-- <battle-creator /> -->
+      <q-card class="inline shadow-4">
+
+        <q-card-media>
+          <img align="center" src="~assets/003.svg" width="100" height="100">
+        </q-card-media>
+      </q-card>
+
+      <br /><br />
+
       <q-table
-        title="Table Title"
+        title=""
         :data="this.data"
         :columns="columns"
         row-key="name"
+        :pagination.sync="pagination"
       >
-
-      <template slot="top-left" slot-scope="props">
-      <q-select
-        v-model="selection"
-        stack-label="Selection"
-        hide-underline
-        :options="[
-          { label: 'Single', value: 'single' },
-          { label: 'Multiple', value: 'multiple' },
-          { label: 'None', value: 'none' }
-        ]"
-        color="secondary"
-        style="min-width: 100px"
-      />
-    </template>
-
-
-
+      <q-tr slot="body" slot-scope="props" :props="props" class="cursor-pointer">
+        <q-td v-for="col in props.cols" :key="col.name" :props="props" style="font-size:15px">
+           {{ col.value }}
+        </q-td>
+        <q-td>
+          <q-btn size="sm" flat icon="fa-angle-right" @click="rowClick(props.row)"></q-btn>
+        </q-td>
+      </q-tr>
       </q-table>
     </div>
 
@@ -54,36 +54,48 @@ export default {
       loading: false,
       data: null,
       columns: [
-      {
-        name: 'name',
-        required: true,
-        label: 'MC',
-        align: 'left',
-        field: 'name',
-        sortable: true
-      },
-      {
-        name: 'points',
-        required: true,
-        label: 'Pontos',
-        align: 'center',
-        field: 'points',
-        sortable: true
-      },
-    ],
+        {
+          name: 'name',
+          required: true,
+          label: 'MC',
+          align: 'left',
+          field: 'name',
+          sortable: true
+        },
+        {
+          name: 'points',
+          required: true,
+          label: 'Pontos',
+          align: 'center',
+          field: 'points',
+          sortable: true
+        },
+      ],
+      pagination: {
+        sortBy: null,
+        descending: false,
+        page: 1,
+        rowsPerPage: 10
+      }
     }
   },
 
-  async mounted () {
-    this.loading = true
+  async beforeMount() {
+    if (this.$store.getters.ranking == null) {
+      this.loading = true
+      await this.$store.dispatch('FETCH_RANKING')
+    }
 
-    let d = await api.getRanking()
+    this.data = this.$store.getters.ranking
 
-    this.data = d.data
-
-    console.log(this.data)
     this.loading = false
-    // console.log(this.battle)
+  },
+
+  methods: {
+    rowClick (v) {
+      console.log(v)
+      this.$router.push('/profile/detail/'+v._id)
+    }
   }
 
 }

@@ -1,7 +1,7 @@
 <template>
 <div>
 
-    <div style="background: no-repeat top/100% url(https://images8.alphacoders.com/362/362827.jpg); background-size: 100%">
+    <div>
 
         <div style="padding-top: 13em">
             <q-list no-border link inset-separator>
@@ -17,7 +17,7 @@
                     <q-item-side icon="trending up" />
                     <q-item-main label="Usuários"/>
                 </q-side-link>
-              
+
 
                 <q-btn class="signout" @click="logout">
                   <q-icon name="fa-sign-out" />

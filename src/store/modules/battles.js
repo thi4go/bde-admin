@@ -1,12 +1,14 @@
 import {
   DEFINE_BATTLES,
-  DEFINE_ACTIVE_BATTLE
+  DEFINE_ACTIVE_BATTLE,
+  DEFINE_RANKING
 } from '../mutations'
 
 import {
   SET_BSTATE,
   FETCH_BATTLES,
   FETCH_ACTIVE_BATTLE,
+  FETCH_RANKING,
   CREATE_BATTLE,
   UPDATE_BATTLE,
   UPDATE_ROUND_WINNER
@@ -17,7 +19,8 @@ import api from '../../api'
 
 const state = {
   battles      : [],
-  activeBattle : null
+  activeBattle : null,
+  ranking: null
 }
 
 const getters = {
@@ -33,6 +36,10 @@ const getters = {
 
   activeBattle: (state) => {
     return state.activeBattle
+  },
+
+  ranking: (state) => {
+    return state.ranking
   }
 }
 
@@ -43,6 +50,10 @@ const mutations = {
 
   [DEFINE_ACTIVE_BATTLE] (state, battle) {
     state.activeBattle = battle
+  },
+
+  [DEFINE_RANKING] (state, ranking) {
+    state.ranking = ranking
   }
 }
 
@@ -84,6 +95,15 @@ const actions = {
     }
 
     return localforage.setItem('activeBattle', activeBattle.data)
+  },
+
+  async [FETCH_RANKING] ({commit, state}) {
+    try {
+      let ranking = await api.getRanking()
+      commit (DEFINE_RANKING, ranking.data)
+    } catch (err) {
+      console.log(err)
+    }
   },
 
   /*
