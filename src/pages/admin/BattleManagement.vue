@@ -110,7 +110,7 @@
 
 import { mapGetters, mapActions } from 'vuex'
 
-import BattleCreator from '../../components/battle/BattleCreator.vue'
+import BattleCreator from './BattleCreator.vue'
 
 import DateFormat from '../../utils/DateFormat'
 import Statistics from '../../utils/Statistics'

@@ -8,7 +8,6 @@
   <q-tabs align="justify" slot="footer" position="top" color="black" width="4%" >
     <q-route-tab @select="changeFocus(1)" :color="selectedTab == 1 ? 'pink-7' : 'pink-3'" slot="title" icon="home" to="/" replace  />
     <q-route-tab @select="changeFocus(2)" :color="selectedTab == 2 ? 'pink-7' : 'pink-3'" slot="title" icon="fa-microphone" to="/ranking" replace  />
-    <q-route-tab @select="changeFocus(3)" :color="selectedTab == 3 ? 'pink-7' : 'pink-3'" slot="title" icon="linked_camera" to="/media" replace  />
     <q-route-tab @select="changeFocus(4)" :color="selectedTab == 4 ? 'pink-7' : 'pink-3'" slot="title" icon="person" to="/profile" replace  />
   </q-tabs>
   <!-- </q-toolbar> -->

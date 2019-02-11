@@ -45,7 +45,7 @@ export default {
     return http.get('/users')
   },
 
-  getUserById (id) {
+  getUser (id) {
     return http.get('/user/'+id)
   },
 

@@ -92,6 +92,7 @@
             </div>
 
             <div v-else class="row justify-around " style="padding-top: 20px">
+              <AddLinkModal v-if="editMode" :round="round" />
               <q-btn-group>
                 <UserList v-if="editMode" v-on:update="updateRound" :round="round" :position="1"/>
                 <q-btn size="sm" :color="round.first._id == round.winner._id ? 'green' : 'grey'" :outline="round.first._id == round.winner._id ? false : true">
@@ -140,11 +141,12 @@
 <script>
 import api from '../../api'
 import UserList from 'components/users/UserList'
+import AddLinkModal from 'components/battle/AddLinkModal'
 
 export default {
   name: 'BattleRecord',
 
-  components: { UserList },
+  components: { UserList, AddLinkModal },
 
   data () {
     return {

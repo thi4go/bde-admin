@@ -5,7 +5,7 @@
  */
   export const SET_INITIAL_SESSION_STATE = 'SET_INITIAL_SESSION_STATE'
   export const SET_SESSION = 'SET_SESSION'
-
+  export const SET_USER    = 'SET_USER'
 
 /*
  *  BATTLES MODULE

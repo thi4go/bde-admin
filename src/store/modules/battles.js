@@ -74,10 +74,11 @@ const actions = {
     const battles = await api.getBattles()
 
     let bs = battles.data.sort( (a, b) => {
-      var n = a.name.substring(5)
-      var m = b.name.substring(5)
-      if (n < m) return -1
-      if (n > m) return 1
+      var n = a.name.split("#").pop()
+      var m = b.name.split("#").pop()
+
+      if (parseInt(n) < parseInt(m)) return -1
+      if (parseInt(n) > parseInt(m)) return 1
       return 0
     })
 

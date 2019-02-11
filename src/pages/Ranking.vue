@@ -81,6 +81,8 @@ export default {
   },
 
   async beforeMount() {
+    this.$store.dispatch('SET_BACK_BUTTON', false)
+    
     if (this.$store.getters.ranking == null) {
       this.loading = true
       await this.$store.dispatch('FETCH_RANKING')

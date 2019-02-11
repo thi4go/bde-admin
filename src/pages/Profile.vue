@@ -15,20 +15,14 @@
           </div>
         </div>
       </q-card-title>
-      <!-- <q-card-separator /> -->
-
-      <!-- <q-card-main>
-        Card Content
-      </q-card-main> -->
-      <!-- <q-card-separator /> -->
-
-      <!-- <q-card-actions horizontal>
-        <q-btn flat label="Action 1" />
-        <q-btn flat label="Action 2" />
-      </q-card-actions> -->
+      <br />
+      <q-card-main>
+        <q-uploader :url="url" @add="files" :send-raw="true" color="dark"/>
+      </q-card-main>
     </q-card>
 
     <br />
+
     <div class="col col-8 bot">
       <q-tabs color="white" position="top" inverted >
         <!-- Tabs - notice slot="title" -->
@@ -70,12 +64,24 @@ export default {
 
   data () {
     return {
-      user: null
+      user: null,
+      url: "http://localhost:8000/upload-image"
     }
   },
 
   beforeMount () {
+    this.$store.dispatch('SET_BACK_BUTTON', false)
+
     this.user = this.$store.getters.session.user
+  },
+
+  methods: {
+    files (fs) {
+      console.log(fs)
+    },
+    upload (fs) {
+      console.log(fs)
+    }
   }
 }
 </script>

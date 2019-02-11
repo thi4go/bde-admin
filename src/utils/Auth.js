@@ -6,7 +6,7 @@ export default {
   requireAuth (to, from, next) {
     let session = store.getters.session
 
-    if (session == null || session == undefined) {
+    if (session.user == null || session == undefined) {
       localforage.getItem('session').then( resp => {
         if (resp != null) {
           store.commit('DEFINE_SESSION', resp)

@@ -1,9 +1,11 @@
 import {
-  DEFINE_SESSION
+  DEFINE_SESSION,
+  DEFINE_USER
 } from '../mutations'
 
 import {
   SET_SESSION,
+  SET_USER,
   SET_INITIAL_SESSION_STATE
 } from '../actions'
 
@@ -11,7 +13,10 @@ import localforage from 'localforage'
 import api from '../../api/'
 
 const state = {
-  session: null
+  session: {
+    user: null,
+    token: null
+  }
 }
 
 
@@ -24,6 +29,10 @@ const getters = {
 const mutations = {
   [DEFINE_SESSION] (state, session) {
     state.session = session
+  },
+
+  [DEFINE_USER] (state, user) {
+    state.session.user = user
   }
 }
 
@@ -42,6 +51,10 @@ const actions = {
     } catch (error) {
       throw error
     }
+  },
+
+  [SET_USER] ({commit, state}, user) {
+    commit(DEFINE_USER, user)
   },
 
   async register ({dispatch, commit}, payload) {

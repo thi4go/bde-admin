@@ -1,6 +1,15 @@
 <template>
   <q-page>
-
+    <q-card class="inline">
+      <q-card-title>
+        <div>
+          Liga 2018/1
+        </div>
+          <div slot="right">
+            batalhas
+          </div>
+      </q-card-title>
+    </q-card>
     <div v-for="battle in $store.getters.battles">
       <br />
       <q-card inline style="width: 100%">
@@ -77,6 +86,8 @@ export default {
   },
 
   async beforeMount() {
+    this.$store.dispatch('SET_BACK_BUTTON', false)
+
     if (this.$store.getters.battles.length == 0) {
       this.loading = true
       await this.$store.dispatch('SET_BSTATE')

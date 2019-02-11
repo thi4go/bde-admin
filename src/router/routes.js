@@ -23,6 +23,7 @@ export default [
         ]
       },
 
+      { path: '/media', component: () => import('pages/Media') },
 
       { path: '/profile', component: () => import('pages/Profile') },
       { path: '/profile/detail/:id', component: () => import('pages/ProfileDetail') },

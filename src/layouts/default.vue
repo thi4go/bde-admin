@@ -2,7 +2,7 @@
   <q-layout view="hHr Lpr lFf" >
     <q-layout-header>
       <q-toolbar color="black">
-        <q-btn v-if="$store.getters.session.user.userLevel == 4" flat @click="leftDrawerOpen = !leftDrawerOpen" color="pink-7">
+        <q-btn v-if="$store.getters.session.user != null && $store.getters.session.user.user_level == 4" flat @click="leftDrawerOpen = !leftDrawerOpen" color="pink-7">
           <q-icon name="menu" />
         </q-btn>
 
@@ -10,11 +10,13 @@
           <q-icon name="fa-arrow-left" />
         </q-btn>
 
-        <q-toolbar-title glossy="true" align="center" :style="$store.getters.backButton ? 'padding-left: 1px' : 'padding-left:50px'" >
+        <q-toolbar-title glossy="true" align="center"
+          :style="$store.getters.backButton ? 'padding-left: 26px' : 'padding-left:75px'"
+        >
             BDE
         </q-toolbar-title>
 
-        <q-btn-dropdown icon="fa-ellipsis-v">
+        <q-btn-dropdown >
           <q-list link>
             <q-item>
               <q-item-main>
@@ -24,7 +26,7 @@
             <q-item-separator />
             <q-item>
               <q-item-main>
-                <q-btn size="md" flat icon="fa-reply" label="Sair" ></q-btn>
+                <q-btn size="md" flat icon="fa-reply" label="Sair" @click="logout" ></q-btn>
               </q-item-main>
             </q-item>
 
@@ -73,9 +75,9 @@
     </q-page-container>
 
 
-    <q-layout-footer>
+    <q-layout-footer style="position: fixed">
     <!-- Navigation for iOS theme -->
-      <q-tabs align="justify" position="top" color="black" width="4%" >
+      <q-tabs align="justify" position="top" color="black" >
         <q-route-tab @select="changeFocus(1)" :color="selectedTab == 1 ? 'pink-7' : 'pink-3'" slot="title" icon="home" to="/home" replace  />
         <q-route-tab @select="changeFocus(2)" :color="selectedTab == 2 ? 'pink-7' : 'pink-3'" slot="title" icon="mic" to="/ranking" replace  />
         <q-route-tab @select="changeFocus(3)" :color="selectedTab == 3 ? 'pink-7' : 'pink-3'" slot="title" icon="linked_camera" to="/media" replace  />
@@ -105,7 +107,7 @@ export default {
 
     async logout () {
       await this.$store.dispatch('SET_SESSION', null)
-      this.$router.go('/startup')
+      this.$router.replace('/startup')
     }
   }
 }
